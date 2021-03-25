@@ -72,10 +72,11 @@ public final class GreengrassCoreIPCService extends EventStreamRPCServiceHandler
 
   public static final String GET_THING_SHADOW = SERVICE_NAMESPACE + "#GetThingShadow";
 
+  public static final String LIST_NAMED_SHADOWS_FOR_THING = SERVICE_NAMESPACE + "#ListNamedShadowsForThing";
+
   static {
     SERVICE_OPERATION_SET = new HashSet();
     SERVICE_OPERATION_SET.add(SUBSCRIBE_TO_IOT_CORE);
-    SERVICE_OPERATION_SET.add(PUBLISH_TO_TOPIC);
     SERVICE_OPERATION_SET.add(PUBLISH_TO_IOT_CORE);
     SERVICE_OPERATION_SET.add(SUBSCRIBE_TO_CONFIGURATION_UPDATE);
     SERVICE_OPERATION_SET.add(LIST_COMPONENTS);
@@ -99,6 +100,7 @@ public final class GreengrassCoreIPCService extends EventStreamRPCServiceHandler
     SERVICE_OPERATION_SET.add(DELETE_THING_SHADOW);
     SERVICE_OPERATION_SET.add(UPDATE_THING_SHADOW);
     SERVICE_OPERATION_SET.add(GET_THING_SHADOW);
+    SERVICE_OPERATION_SET.add(LIST_NAMED_SHADOWS_FOR_THING);
   }
 
   private final Map<String, Function<OperationContinuationHandlerContext, ? extends ServerConnectionContinuationHandler>> operationSupplierMap;
@@ -236,6 +238,11 @@ public final class GreengrassCoreIPCService extends EventStreamRPCServiceHandler
   public void setGetThingShadowHandler(
           Function<OperationContinuationHandlerContext, GeneratedAbstractGetThingShadowOperationHandler> handler) {
     operationSupplierMap.put(GET_THING_SHADOW, handler);
+  }
+
+  public void setListNamedShadowsForThingHandler(
+          Function<OperationContinuationHandlerContext, GeneratedAbstractListNamedShadowsForThingOperationHandler> handler) {
+    operationSupplierMap.put(LIST_NAMED_SHADOWS_FOR_THING, handler);
   }
 
   @Override
